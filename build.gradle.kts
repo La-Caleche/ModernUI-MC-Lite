@@ -1,18 +1,9 @@
 plugins {
     id("fabric-loom")
-    `java-library`
-    `maven-publish`
-}
-
-version = providers.gradleProperty("modVersion").get()
-group = providers.gradleProperty("mavenGroup").get()
-
-base {
-    archivesName.set(providers.gradleProperty("archiveBaseName").get())
+    id("fr.lacaleche.caldle")
 }
 
 repositories {
-    mavenCentral()
     maven("https://maven.izzel.io/releases/")
 }
 
@@ -56,16 +47,6 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
-    withSourcesJar()
-}
-
-tasks.withType<JavaCompile>().configureEach {
-    options.encoding = "UTF-8"
-    options.release.set(21)
-}
-
 tasks {
     processResources {
         inputs.property("version", project.version)
@@ -85,14 +66,7 @@ tasks {
     }
 
     remapJar {
-        archiveBaseName.set(providers.gradleProperty("archiveBaseName").get())
-    }
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-        }
+        archiveBaseName.set("${rootProject.name}-${project.name}")
+        destinationDirectory.set(rootDir.resolve("build").resolve("libs"))
     }
 }
