@@ -1,0 +1,20 @@
+{
+    "schemaVersion": 1,
+    "id": "mui-lite-test",
+    "version": "${version}",
+    "name": "ModernUI MC Lite Testmod",
+    "environment": "client",
+    "description": "Simple test mod for ModernUI MC Lite",
+    "entrypoints": {
+        "client": [
+            "fr.lacaleche.mui.testmod.TestmodClient"
+        ]
+    },
+    "depends": {
+        "fabricloader": ">=0.17",
+        "minecraft": "~1.21.8",
+        "java": ">=21",
+        "fabric-api": "*",
+        "mui-lite": "*"
+    }
+}
